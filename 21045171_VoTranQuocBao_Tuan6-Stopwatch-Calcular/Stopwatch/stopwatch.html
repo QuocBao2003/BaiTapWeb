@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stopwatch.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        window.onload = function() {
+            var minutes = 00;
+            var seconds = 00;
+            var tens = 00;
+            var appendMinutes = document.getElementById("minutes");
+            var appendSenconds = document.getElementById("seconds");
+            var appendTens = document.getElementById("tens");
+            var buttonStart = document.getElementById("Start");
+            var buttonStop = document.getElementById("Stop");
+            var buttonReset = document.getElementById("Reset");
+            var Interval;
+            buttonStart.onclick = function() {
+                clearInterval(Interval);
+                Interval = setInterval(startTimer, 10);
+            }
+            buttonStop.onclick = function() {
+                clearInterval(Interval);
+            }
+            buttonReset.onclick = function() {
+                clearInterval(Interval);
+                minutes = "00";
+                seconds = "00";
+                tens = "00";
+                appendMinutes.innerHTML = minutes;
+                appendSenconds.innerHTML = seconds;
+                appendTens.innerHTML = tens;
+            }
+
+            function startTimer() {
+                tens++;
+                if (tens <= 9) {
+                    appendTens.innerHTML = "0" + tens;
+                }
+                if (tens > 9) {
+                    appendTens.innerHTML = tens;
+                }
+                if (tens > 99) {
+                    console.log("seconds");
+                    seconds++;
+                    appendSenconds.innerHTML = "0" + seconds;
+                    tens = 0;
+                    appendTens.innerHTML = "0" + 0;
+                }
+                if (seconds > 9) {
+                    appendSenconds.innerHTML = seconds;
+                }
+                if (seconds > 59) {
+                    console.log("minutes");
+                    minutes++;
+                    appendMinutes.innerHTML = "0" + minutes;
+                    seconds = 0;
+                    appendSenconds.innerHTML = "0" + 0;
+                    tens = 0;
+                    appendTens.innerHTML = "0" + 0;
+                }
+                if (minutes > 9) {
+                    appendMinutes.innerHTML = minutes;
+                }
+            }
+        }
+    </script>
+    <div id="wrapper">
+        <h1>STOPWATCH</h1>
+        <p>
+            <span id="minutes">00</span>
+            <span>:</span>
+            <span id="seconds">00</span>
+            <span>:</span>
+            <span id="tens">00
+        </p>
+        <button id="Start">Start</button>
+        <button id="Stop">Stop</button>
+        <button id="Reset">Reset</button>
+    </div>
+</body>
+
+</html>
